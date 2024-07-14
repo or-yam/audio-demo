@@ -14,12 +14,29 @@ body {
   margin: 0;
 }
 
-#play {
+button {
+  width: 200px;
+  height: 50%;
   border: none;
+  border-radius: 10px;
   background-color: #4af626;
   font-size: xx-large;
   box-shadow: inset -1px 0px 13px 20px green;
 }
-#play:hover {
+button:hover {
   cursor: pointer;
+}
+button:active {
+  transform: scale(0.9);
+  transition: transform 0.1s;
+  background-color: green;
+  box-shadow: inset -1px 0px 13px 20px #4af626;
+}
+
+.button-container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
 }
