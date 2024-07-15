@@ -1,4 +1,5 @@
 import './style.css';
+import processorUrl from './processor?url';
 
 const CANVAS_WIDTH = window.innerWidth;
 const CANVAS_HEIGHT = 400;
@@ -13,7 +14,7 @@ const canvas: HTMLCanvasElement = document.querySelector('canvas')!;
 let mediaElementSource: MediaStreamAudioSourceNode | MediaElementAudioSourceNode;
 let micStream: MediaStream;
 let micState = false;
-let audioContext = new AudioContext();
+let audioContext: AudioContext;
 
 const canvasContext = canvas.getContext('2d')!;
 canvas.width = CANVAS_WIDTH;
@@ -27,8 +28,8 @@ const initAudio = async (audioElement?: HTMLAudioElement) => {
     // Initialize microphone
 
     //   Processor
-    // await audioContext.audioWorklet.addModule('src/white-noise-processor.js');
-    // const processor = new AudioWorkletNode(audioContext, 'white-noise-processor');
+    await audioContext.audioWorklet.addModule(processorUrl);
+    const processor = new AudioWorkletNode(audioContext, 'processor');
 
     try {
       micStream = await navigator.mediaDevices.getUserMedia({ audio: true });
@@ -39,7 +40,7 @@ const initAudio = async (audioElement?: HTMLAudioElement) => {
     }
 
     mediaElementSource = audioContext.createMediaStreamSource(micStream);
-    // mediaElementSource.connect(processor);
+    mediaElementSource.connect(processor);
   } else {
     // Initialize audio element
     mediaElementSource = audioContext.createMediaElementSource(audioElement);
