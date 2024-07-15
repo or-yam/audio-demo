@@ -9,7 +9,14 @@
   <body>
     <canvas></canvas>
     <audio src="Pokémon.mp3 "></audio>
-    <button id="play">▶</button>
+    <div class="button-container">
+      <button id="play">▶</button>
+      <div id="frequency">
+        <div id="hz-meter"></div>
+        <span>0 hz</span>
+      </div>
+      <button id="mic">🎤</button>
+    </div>
     <script defer type="module" src="/src/main.ts"></script>
   </body>
 </html>
