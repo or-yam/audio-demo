@@ -27,8 +27,8 @@ const initAudio = async (audioElement?: HTMLAudioElement) => {
     // Initialize microphone
 
     //   Processor
-    await audioContext.audioWorklet.addModule('src/white-noise-processor.js');
-    const processor = new AudioWorkletNode(audioContext, 'white-noise-processor');
+    // await audioContext.audioWorklet.addModule('src/white-noise-processor.js');
+    // const processor = new AudioWorkletNode(audioContext, 'white-noise-processor');
 
     try {
       micStream = await navigator.mediaDevices.getUserMedia({ audio: true });
@@ -39,7 +39,7 @@ const initAudio = async (audioElement?: HTMLAudioElement) => {
     }
 
     mediaElementSource = audioContext.createMediaStreamSource(micStream);
-    mediaElementSource.connect(processor);
+    // mediaElementSource.connect(processor);
   } else {
     // Initialize audio element
     mediaElementSource = audioContext.createMediaElementSource(audioElement);
